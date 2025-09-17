@@ -1,0 +1,6 @@
+# Ignore build output (ignores all _.out files)
+*.out
+
+# Ignore editor files
+.vscode/
+*.swp
