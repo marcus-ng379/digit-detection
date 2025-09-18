@@ -2,9 +2,9 @@
 #define ACTIVATIONTYPE_H
 
 enum ActivationType {
-    Sigmoid,
-    ReLU,
-    Softmax
+    sigmoid,
+    relu,
+    softmax
 };
 
 #endif

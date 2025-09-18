@@ -11,5 +11,5 @@ double Sigmoid::Der(double* inputs, int inputs_length, int index) {
 }
 
 ActivationType Sigmoid::GetType() {
-    return ActivationType::Sigmoid;
+    return ActivationType::sigmoid;
 }

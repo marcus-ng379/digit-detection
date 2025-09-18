@@ -10,5 +10,5 @@ double ReLU::Der(double* inputs, int inputs_length, int index) {
 }
 
 ActivationType ReLU::GetType() {
-    return ActivationType::ReLU;
+    return ActivationType::relu;
 }
