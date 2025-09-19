@@ -3,6 +3,7 @@
 #include "Activations.h"
 #include "LayerLearningData.h"
 #include "Costs.h"
+#include <utility>
 
 class Layer {
     private:
@@ -38,7 +39,7 @@ class Layer {
 
         // Calculate Output of the layer
         double* Output(double* inputs);
-        double* Output(double* inputs, int inputs_length, LayerLearningData* learn_data);
+        std::pair<double*, int> Output(double* inputs, int inputs_length, LayerLearningData* learn_data);
 
         // Apply previously calculated gradients, updating weights and biases, and resetting the gradients
         void ApplyGradients(double learn_rate, double regularization, double momentum);

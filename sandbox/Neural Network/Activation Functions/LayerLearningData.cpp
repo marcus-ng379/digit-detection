@@ -40,6 +40,9 @@ double* LayerLearningData::get_activations() {
 void LayerLearningData::set_node_values(int index, double value) {
     this->node_values[index] = value;
 }
+double* LayerLearningData::get_node_values() {
+    return this->node_values;
+}
 
 double LayerLearningData::get_node_values(int index) {
     return this->node_values[index];

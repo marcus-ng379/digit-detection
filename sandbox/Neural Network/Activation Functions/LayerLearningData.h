@@ -19,6 +19,7 @@ class LayerLearningData {
         void set_activations(int index, double value);
         double* get_activations();
         void set_node_values(int index, double value);
+        double* get_node_values();
         double get_node_values(int index);
         double get_inputs(int index);
 };

@@ -1,6 +1,7 @@
 #include "Layer.h"
 #include "Sigmoid.h"
 #include <cstdlib>
+#include <utility>
 
 Layer::Layer(int num_input_nodes, int num_output_nodes) {
     this->num_input_nodes = num_input_nodes;
@@ -72,7 +73,7 @@ double* Layer::Output(double* inputs) {
     return activated;
 }
         
-double* Layer::Output(double* inputs, int inputs_length, LayerLearningData* learn_data) {
+std::pair<double*, int> Layer::Output(double* inputs, int inputs_length, LayerLearningData* learn_data) {
     learn_data->set_inputs(inputs);
 
     for (int output_node = 0; output_node < this->num_output_nodes; output_node++) {
@@ -88,7 +89,7 @@ double* Layer::Output(double* inputs, int inputs_length, LayerLearningData* lear
         learn_data->set_activations(output_node, this->activation->Activate(learn_data->get_weighted_inputs(), this->num_output_nodes, output_node));
     }
 
-    return learn_data->get_activations();
+    return std::make_pair(learn_data->get_activations(), learn_data->get_size());
 }
 
 // Apply previously calculated gradients, updating weights and biases, and resetting the gradients

@@ -6,3 +6,7 @@ NetworkLearningData::NetworkLearningData(Layer** layer, int num_layers) {
         this->layer_data[i] = new LayerLearningData(layer[i]);
     }
 }
+
+LayerLearningData* NetworkLearningData::get_layer_data(int index) {
+    return this->layer_data[index];
+}
