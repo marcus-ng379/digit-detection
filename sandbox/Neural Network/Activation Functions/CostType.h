@@ -2,8 +2,8 @@
 #define COSTTYPE_H
 
 enum CostType {
-    MeanSquaredError,
-    CrossEntropy
+    meanSquaredError,
+    crossEntropy
 };
 
 #endif
