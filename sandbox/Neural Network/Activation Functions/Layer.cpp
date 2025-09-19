@@ -1,7 +1,6 @@
 #include "Layer.h"
 #include "Sigmoid.h"
 #include <cstdlib>
-#include <ctime>
 
 Layer::Layer(int num_input_nodes, int num_output_nodes) {
     this->num_input_nodes = num_input_nodes;
@@ -45,8 +44,6 @@ int Layer::get_flat_weight_index(int input_node_index, int output_node_index) {
 
 // Initialization with random values
 void Layer::init_random_weights() {
-    // RNG seed
-    srand(static_cast<unsigned int>(time(0)));
 
     for (int i = 0; i < this->len_weights; i++) {
         // For now, all weights are initialized with a random value between -3 and 3
