@@ -7,6 +7,8 @@ class CallActivation {
         Activations* activation;
     public:
         CallActivation(ActivationType activation);
+        Activations* get_activation();
+        void set_activation(ActivationType activation);
         ~CallActivation();
 };
 

@@ -108,7 +108,7 @@ void Layer::ApplyGradients(double learn_rate, double regularization, double mome
         double velocity = this->bias_vels[i] * momentum - this->cost_gradient_b[i] * learn_rate;
         this->bias_vels[i] = velocity;
         this->biases[i] += velocity;
-        cost_gradient_b[i] = 0;
+        this->cost_gradient_b[i] = 0;
     }
 }
 

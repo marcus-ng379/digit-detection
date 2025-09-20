@@ -4,6 +4,14 @@
 #include "Softmax.h"
 
 CallActivation::CallActivation(ActivationType activation) {
+    this->set_activation(activation);
+}
+
+Activations* CallActivation::get_activation() {
+    return this->activation;
+}
+
+void CallActivation::set_activation(ActivationType activation) {
     switch (activation) {
         case sigmoid:
             this->activation = new Sigmoid();
