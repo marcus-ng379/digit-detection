@@ -2,7 +2,7 @@
 #include <utility>
 #include <random>
 
-std::pair<DataPoint**, DataPoint**> DatasetHandling::SplitData(DataPoint** all_data, int all_data_length, float training_split = 0.75, bool shuffle = true) {
+std::pair<std::pair<DataPoint**, int>, std::pair<DataPoint**, int>> DatasetHandling::SplitData(DataPoint** all_data, int all_data_length, float training_split = 0.75, bool shuffle = true) {
     if (shuffle) {
         this->ShuffleArray(all_data, all_data_length);
     }
@@ -24,10 +24,10 @@ std::pair<DataPoint**, DataPoint**> DatasetHandling::SplitData(DataPoint** all_d
     for (int i = 0; i < validation_count; i++) {
         validation_data[i] = all_data[i + train_count];
     }
-    return std::make_pair(train_data, validation_data);
+    return std::make_pair(std::make_pair(train_data, train_count), std::make_pair(validation_data, validation_count));
 }
         
-Batch** DatasetHandling::CreateMiniBatches(DataPoint** all_data, int all_data_length, int size, bool shuffle = true) {
+std::pair<Batch**, int> DatasetHandling::CreateMiniBatches(DataPoint** all_data, int all_data_length, int size, bool shuffle = true) {
     if (shuffle) {
         this->ShuffleArray(all_data, all_data_length);
     }
@@ -41,14 +41,14 @@ Batch** DatasetHandling::CreateMiniBatches(DataPoint** all_data, int all_data_le
         }
         batches[i] = new Batch(batch_data);
     }
-    return batches;
+    return std::make_pair(batches, num_batches);
 }
         
 void DatasetHandling::ShuffleBatches(Batch** batches, int num_batches) {
     this->ShuffleArray(batches, num_batches);
 }
         
-static void DatasetHandling::ShuffleArray(auto** array, int array_length) {
+void DatasetHandling::ShuffleArray(auto** array, int array_length) {
     std::default_random_engine rng();
     std::shuffle(array[0], array[array_length - 1], rng);
 }

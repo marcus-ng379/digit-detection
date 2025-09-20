@@ -4,6 +4,7 @@ DataPoint::DataPoint(double* inputs, int inputs_length, int label, int num_label
     this->inputs = inputs;
     this->inputs_length = inputs_length;
     this->label = label;
+    this->expected_outputs_length = num_labels;
     this->expected_outputs = this->CreateOneHot(label, num_labels);
 }
 
@@ -15,8 +16,16 @@ int DataPoint::get_inputs_length() {
     return this->inputs_length;
 }
 
+int DataPoint::get_label() {
+    return this->label;
+}
+
 double* DataPoint::get_expected_outputs() {
     return this->expected_outputs;
+}
+
+int DataPoint::get_expected_outputs_length() {
+    return this->expected_outputs_length;
 }
 
 double* DataPoint::CreateOneHot(int index, int num) {
