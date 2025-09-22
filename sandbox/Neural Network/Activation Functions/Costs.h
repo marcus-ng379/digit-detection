@@ -4,9 +4,9 @@
 
 class Costs {
     public:
-        virtual double Output(double* traversed_outputs, double* expected_outputs, int outputs_length);
-        virtual double Der(double traversed_outputs, double expected_outputs);
-        virtual CostType GetType();
+        virtual double Output(double* traversed_outputs, double* expected_outputs, int outputs_length) = 0;
+        virtual double Der(double traversed_outputs, double expected_outputs) = 0;
+        virtual CostType GetType() = 0;
 };
 
 #endif

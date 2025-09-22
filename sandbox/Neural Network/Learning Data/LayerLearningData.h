@@ -1,6 +1,8 @@
 #ifndef LAYERLEARNINGDATA_H
 #define LAYERLEARNINGDATA_H
-#include "Layer.h"
+
+//Forward Declaration to prevent circular dependency
+class Layer;
 
 class LayerLearningData {
     private:

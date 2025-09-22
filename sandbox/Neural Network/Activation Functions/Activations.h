@@ -4,9 +4,9 @@
 
 class Activations {
     public:
-        virtual double Activate(double* inputs, int inputs_length, int index);
-        virtual double Der(double* inputs, int inputs_length, int index);
-        virtual ActivationType GetType();
+        virtual double Activate(double* inputs, int inputs_length, int index) = 0;
+        virtual double Der(double* inputs, int inputs_length, int index) = 0;
+        virtual ActivationType GetType() = 0;
 };
 
 #endif

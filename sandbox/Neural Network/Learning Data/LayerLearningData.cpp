@@ -1,4 +1,5 @@
 #include "LayerLearningData.h"
+#include "Layer.h"
 
 LayerLearningData::LayerLearningData() {
     this->weighted_inputs = nullptr;

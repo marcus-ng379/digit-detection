@@ -47,7 +47,7 @@ double* NeuralNetwork::CalculateOutputs(double* inputs) {
 }
 
 // Learning
-void NeuralNetwork::Learn(DataPoint** training_data, int training_data_length, double learn_rate, double regularization = 0.0, double momentum = 0.0) {
+void NeuralNetwork::Learn(DataPoint** training_data, int training_data_length, double learn_rate, double regularization, double momentum) {
     // LEARN Scripts
     // Initialize batch
     if (this->batch_learn_data == NULL || this->batch_learn_data_length != training_data_length) {

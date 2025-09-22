@@ -2,7 +2,7 @@
 #include <utility>
 #include <random>
 
-std::pair<std::pair<DataPoint**, int>, std::pair<DataPoint**, int>> DatasetHandling::SplitData(DataPoint** all_data, int all_data_length, float training_split = 0.75, bool shuffle = true) {
+std::pair<std::pair<DataPoint**, int>, std::pair<DataPoint**, int>> DatasetHandling::SplitData(DataPoint** all_data, int all_data_length, float training_split, bool shuffle) {
     if (shuffle) {
         this->ShuffleArray(all_data, all_data_length);
     }
@@ -27,7 +27,7 @@ std::pair<std::pair<DataPoint**, int>, std::pair<DataPoint**, int>> DatasetHandl
     return std::make_pair(std::make_pair(train_data, train_count), std::make_pair(validation_data, validation_count));
 }
         
-std::pair<Batch**, int> DatasetHandling::CreateMiniBatches(DataPoint** all_data, int all_data_length, int size, bool shuffle = true) {
+std::pair<Batch**, int> DatasetHandling::CreateMiniBatches(DataPoint** all_data, int all_data_length, int size, bool shuffle) {
     if (shuffle) {
         this->ShuffleArray(all_data, all_data_length);
     }

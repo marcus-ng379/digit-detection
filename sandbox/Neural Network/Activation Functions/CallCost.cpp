@@ -14,13 +14,16 @@ void CallCost::set_activation(CostType activation) {
     switch (activation) {
         case meanSquaredError:
             this->activation = new MeanSquaredError();
+            break;
         case crossEntropy:
             this->activation = new CrossEntropy();
+            break;
         default:
             this->activation = new MeanSquaredError();
+            break;
     }
 }
 
 CallCost::~CallCost() {
-    delete[] this->activation;
+    delete this->activation;
 }

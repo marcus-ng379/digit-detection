@@ -1,6 +1,7 @@
 #include "Layer.h"
 #include "Sigmoid.h"
 #include <cstdlib>
+#include <cmath>
 #include <utility>
 
 Layer::Layer(int num_input_nodes, int num_output_nodes) {
@@ -19,6 +20,11 @@ Layer::Layer(int num_input_nodes, int num_output_nodes) {
     this->bias_vels = new double[this->len_biases];
 
     this->init_random_weights();
+
+    for (int i = 0; i < this->len_biases; i++) {
+        this->biases[i] = 0.0;
+        this->cost_gradient_b[i] = 0.0;
+    }
 }
 
 //Encapsulation Methods
@@ -45,10 +51,20 @@ int Layer::get_flat_weight_index(int input_node_index, int output_node_index) {
 
 // Initialization with random values
 void Layer::init_random_weights() {
-
+    // Xavier/He initialization
+    double scale;
+    if (this->activation->GetType() == relu) {
+        // He initialization for ReLU
+        scale = std::sqrt(2.0 / num_input_nodes);
+    }
+    else {
+        // Xavier initialization
+        scale = std::sqrt(1.0 / num_input_nodes);
+    }
+    
     for (int i = 0; i < this->len_weights; i++) {
-        // For now, all weights are initialized with a random value between -3 and 3
-        weights[i] = -3.0 + static_cast<double>(rand() / RAND_MAX * 6);
+        this->weights[i] = ((static_cast<double>(rand()) / static_cast<double>(RAND_MAX)) * 2.0 - 1.0) * scale;
+        this->cost_gradient_w[i] = 0.0;
     }
 }
 
@@ -120,6 +136,7 @@ void Layer::OutputLayerNodeValues(LayerLearningData* learn_data, double* expecte
         double activation_derivative = this->activation->Der(learn_data->get_weighted_inputs(), learn_data->get_size(), i);
         learn_data->set_node_values(i, cost_derivative * activation_derivative);
     }
+
 }
 
 // Calculates node values for the hidden layers, same thing as above
