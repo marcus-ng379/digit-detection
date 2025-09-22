@@ -5,6 +5,7 @@
 #include <utility>
 
 Layer::Layer(int num_input_nodes, int num_output_nodes) {
+    // Construction
     this->num_input_nodes = num_input_nodes;
     this->num_output_nodes = num_output_nodes;
     this->activation = new Sigmoid();
@@ -20,7 +21,7 @@ Layer::Layer(int num_input_nodes, int num_output_nodes) {
     this->bias_vels = new double[this->len_biases];
 
     this->init_random_weights();
-
+    // Initializing biases
     for (int i = 0; i < this->len_biases; i++) {
         this->biases[i] = 0.0;
         this->cost_gradient_b[i] = 0.0;
@@ -63,6 +64,7 @@ void Layer::init_random_weights() {
     }
     
     for (int i = 0; i < this->len_weights; i++) {
+        // Xavier/He
         this->weights[i] = ((static_cast<double>(rand()) / static_cast<double>(RAND_MAX)) * 2.0 - 1.0) * scale;
         this->cost_gradient_w[i] = 0.0;
     }
@@ -70,6 +72,7 @@ void Layer::init_random_weights() {
 
 // Calculate Output of the layer
 double* Layer::Output(double* inputs) {
+    // Weighted inputs stores all node values before activation: winput_i = b_i + input_i * w_i
     double* weighted_inputs = new double[this->num_output_nodes];
 
     for (int output_node = 0; output_node < this->num_output_nodes; output_node++) {
@@ -81,6 +84,7 @@ double* Layer::Output(double* inputs) {
         weighted_inputs[output_node] = weighted_input;
     }
 
+    // Activate all weighted inputs using the activation function
     double* activated = new double[this->num_output_nodes];
     for (int output_node = 0; output_node < this->num_output_nodes; output_node++) {
         activated[output_node] = this->activation->Activate(weighted_inputs, this->num_output_nodes, output_node);
@@ -90,6 +94,7 @@ double* Layer::Output(double* inputs) {
 }
         
 std::pair<double*, int> Layer::Output(double* inputs, int inputs_length, LayerLearningData* learn_data) {
+    // Same functions as above but for LayerLearningData: this is for learning
     learn_data->set_inputs(inputs);
 
     for (int output_node = 0; output_node < this->num_output_nodes; output_node++) {
@@ -110,16 +115,21 @@ std::pair<double*, int> Layer::Output(double* inputs, int inputs_length, LayerLe
 
 // Apply previously calculated gradients, updating weights and biases, and resetting the gradients
 void Layer::ApplyGradients(double learn_rate, double regularization, double momentum) {
+    // Weight decay is for weight clipping in case those values are too extreme
     double weight_decay = 1.0 - regularization * learn_rate;
 
+    // Applying to weight
+    // w = (1 − ηλ)w + μv_(t−1) ​− η∇w (η: learn rate, λ: regulatization, μ: momentum, w: weight, ∇w: cost in change in weight)
     for (int i = 0; i < this->len_weights; i++) {
         double weight = this->weights[i];
+        // Velocity of gradient calculation -> essentially how big in magnitude the gradient is
         double velocity = this->weight_vels[i] * momentum - this->cost_gradient_w[i] * learn_rate;
         this->weight_vels[i] = velocity;
         this->weights[i] = weight * weight_decay + velocity;
         this->cost_gradient_w[i] = 0;
     }
 
+    // Applying the same for biases
     for (int i = 0; i < this->len_biases; i++) {
         double velocity = this->bias_vels[i] * momentum - this->cost_gradient_b[i] * learn_rate;
         this->bias_vels[i] = velocity;

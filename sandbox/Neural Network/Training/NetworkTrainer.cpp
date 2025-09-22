@@ -6,6 +6,7 @@
 #include <iostream>
 
 NetworkTrainer::NetworkTrainer() {
+    // Network Training Constructor
     this->training_split = 0.8;
     this->network_settings = new NetworkSettings();
     this->data_helper = DatasetHandling();
@@ -17,6 +18,7 @@ NetworkTrainer::NetworkTrainer() {
 }
 
 NetworkTrainer::NetworkTrainer(NetworkSettings* settings) {
+    // Constructs Network Tester given network settings
     this->training_split = 0.8;
     this->network_settings = settings;
     this->data_helper = DatasetHandling();
@@ -28,10 +30,12 @@ NetworkTrainer::NetworkTrainer(NetworkSettings* settings) {
 }
         
 void NetworkTrainer::StartTrainingSession(int num_epochs) {
+    // Trains the network
     if (!this->data_loaded) {
         this->LoadData();
     }
 
+    // Initializes the neural network
     NeuralNetwork* neural_network = new NeuralNetwork(this->network_settings->get_layer_sizes(), this->network_settings->get_num_layers());
     neural_network->set_activation_function(this->network_settings->get_activation_type(), this->network_settings->get_output_activation_type());
     neural_network->set_cost_function(this->network_settings->get_cost_type());

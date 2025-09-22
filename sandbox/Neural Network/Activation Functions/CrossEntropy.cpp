@@ -2,6 +2,7 @@
 #include <cmath>
 
 double CrossEntropy::Output(double* traversed_outputs, double* expected_outputs, int outputs_length) {
+    // Implementation of the Cross Entropy loss function
     double cost = 0;
     for (int i = 0; i < outputs_length; i++) {
         double x = traversed_outputs[i]; 
@@ -13,6 +14,7 @@ double CrossEntropy::Output(double* traversed_outputs, double* expected_outputs,
 }
         
 double CrossEntropy::Der(double traversed_outputs, double expected_outputs) {
+    // Cross Entropy Derivative
     double x = traversed_outputs;
     double y = expected_outputs;
     if (x == 0.0 || x == 1.0) {

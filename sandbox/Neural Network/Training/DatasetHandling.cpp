@@ -4,6 +4,7 @@
 #include <random>
 
 std::pair<std::pair<DataPoint**, int>, std::pair<DataPoint**, int>> DatasetHandling::SplitData(DataPoint** all_data, int all_data_length, float training_split, bool shuffle) {
+    // Splits sample data into training data and testing data for the neural network
     if (shuffle) {
         this->ShuffleArray(all_data, all_data_length);
     }
@@ -13,12 +14,14 @@ std::pair<std::pair<DataPoint**, int>, std::pair<DataPoint**, int>> DatasetHandl
     else if (training_split < 0.0) {
         training_split = 0.0;
     }
+    // Counts of the arrays
     int train_count = (int)(all_data_length * training_split);
     int validation_count = all_data_length - train_count;
 
     DataPoint** train_data = new DataPoint*[train_count];
     DataPoint** validation_data = new DataPoint*[validation_count];
 
+    // Putting values into the array
     for (int i = 0; i < train_count; i++) {
         train_data[i] = all_data[i];
     }
@@ -29,12 +32,15 @@ std::pair<std::pair<DataPoint**, int>, std::pair<DataPoint**, int>> DatasetHandl
 }
         
 std::pair<Batch**, int> DatasetHandling::CreateMiniBatches(DataPoint** all_data, int all_data_length, int size, bool shuffle) {
+    // Creates Batches for training data, this can optimise training
     if (shuffle) {
         this->ShuffleArray(all_data, all_data_length);
     }
 
     int num_batches = all_data_length / size;
     Batch** batches = new Batch*[num_batches];
+
+    // Inserting data into batches
     for (int i = 0; i < num_batches; i++) {
         DataPoint** batch_data = new DataPoint*[size];
         for (int j = 0; j < size; j++) {
@@ -51,6 +57,7 @@ void DatasetHandling::ShuffleBatches(Batch** batches, int num_batches) {
 
 template <typename T>
 void DatasetHandling::ShuffleArray(T** array, int array_length) {
+    // Shuffles the array like a deck of cards
     std::default_random_engine rng;
     std::shuffle(array, array + array_length, rng);
 }

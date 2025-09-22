@@ -33,6 +33,8 @@ int DataPoint::get_expected_outputs_length() {
 }
 
 double* DataPoint::CreateOneHot(int index, int num) {
+    // Creates expected outputs array from one correct label vs all other incorrect labels,
+    // setting for example: label=3, num_labels=5 -> output: [0,0,0,1,0]
     double* one_hot = new double[num];
     one_hot[index] = 1;
     return one_hot;

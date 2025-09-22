@@ -2,6 +2,7 @@
 #include <cmath>
 
 double Softmax::Activate(double* inputs, int inputs_length, int index) {
+    // Softmax Activation Function: turns node values into percentages
     double sums = 0.0;
     for (int i = 0; i < inputs_length; i++) {
         sums += std::exp(inputs[i]);
@@ -10,6 +11,7 @@ double Softmax::Activate(double* inputs, int inputs_length, int index) {
 }
 
 double Softmax::Der(double* inputs, int inputs_length, int index) {
+    // Softmax derivative
     double sums = 0.0;
     for (int i = 0; i < inputs_length; i++) {
         sums += std::exp(inputs[i]);

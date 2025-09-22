@@ -4,8 +4,11 @@
 
 class Activations {
     public:
+        // Using the function
         virtual double Activate(double* inputs, int inputs_length, int index) = 0;
+        // Using the derivative of the function
         virtual double Der(double* inputs, int inputs_length, int index) = 0;
+        // Gets the Activation Type of the function
         virtual ActivationType GetType() = 0;
 };
 
