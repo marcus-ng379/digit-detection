@@ -8,6 +8,6 @@ class Batch {
     public:
         Batch(DataPoint** data);
         DataPoint** get_data();
-}
+};
 
 #endif

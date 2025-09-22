@@ -62,3 +62,9 @@ void NetworkTrainer::LoadData() {
     this->num_training_batches = result1.second;
     this->data_loaded = true;
 }
+
+// Network Trainer Testing Functions (should not be used for the main project)
+void NetworkTrainer::_set_data(DataPoint** data, int data_length) {
+    this->all_data = data;
+    this->all_data_length = data_length;
+}

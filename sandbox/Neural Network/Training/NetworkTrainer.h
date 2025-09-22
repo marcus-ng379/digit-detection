@@ -1,6 +1,5 @@
 #ifndef NETWORKTRAINER_H
 #define NETWORKTRAINER_H
-#include "DataPoint.h"
 #include "Batch.h"
 #include "NetworkEvaluator.h"
 #include "NetworkSettings.h"
@@ -28,6 +27,9 @@ class NetworkTrainer {
         NetworkTrainer();
         void StartTrainingSession(int num_epochs);
         void LoadData();
+
+        //Network trainer testing functions
+        void _set_data(DataPoint** data, int data_length);
 };
 
 #endif
