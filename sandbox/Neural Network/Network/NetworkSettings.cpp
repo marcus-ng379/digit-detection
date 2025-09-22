@@ -1,14 +1,26 @@
 #include "NetworkSettings.h"
 
 NetworkSettings::NetworkSettings() {
+    /* TIPS FOR USING NETWORK HYPER_PARAMETERS
+    * Initial learning rate is typically 0.001 - 0.1
+    * Learn rate decay is typically 0.3 - 0.9 times less than learn rate
+    * Batch size is typically a power of 2 from 2^4 - 2^8, depending on sample size
+    * Momentum is typically 0.8 - 0.95
+    * Regularization is typically 1e-5 - 1e-3
+    * 
+    * When using ReLU, learning rate needs to be lower, around 0.01 - 0.001
+    * Pair softmax with crossEntropy with the best results
+    * Try avoiding MeanSquaredError as it doesn't pair well with non-linear activations
+    * Generally these generalization problems: relu, softmax and crossEntropy will provide the best networks
+    */
     this->activation_type = new CallActivation(relu);
     this->output_activation_type = new CallActivation(softmax);
     this->cost_type = new CallCost(crossEntropy);
-    this->initial_learning_rate = 0.05;
-    this->learn_rate_decay = 0.075;
+    this->initial_learning_rate = 0.01;
+    this->learn_rate_decay = 0.009;
     this->mini_batch_size = 32;
     this->momentum = 0.9;
-    this->regularization = 0.1;
+    this->regularization = 0.0001;
 }
 
 void NetworkSettings::set_layer_sizes(int* layer_sizes) {

@@ -1,5 +1,6 @@
 #include "DatasetHandling.h"
 #include <utility>
+#include <algorithm>
 #include <random>
 
 std::pair<std::pair<DataPoint**, int>, std::pair<DataPoint**, int>> DatasetHandling::SplitData(DataPoint** all_data, int all_data_length, float training_split, bool shuffle) {
@@ -47,8 +48,9 @@ std::pair<Batch**, int> DatasetHandling::CreateMiniBatches(DataPoint** all_data,
 void DatasetHandling::ShuffleBatches(Batch** batches, int num_batches) {
     this->ShuffleArray(batches, num_batches);
 }
-        
-void DatasetHandling::ShuffleArray(auto** array, int array_length) {
-    std::default_random_engine rng();
-    std::shuffle(array[0], array[array_length - 1], rng);
+
+template <typename T>
+void DatasetHandling::ShuffleArray(T** array, int array_length) {
+    std::default_random_engine rng;
+    std::shuffle(array, array + array_length, rng);
 }

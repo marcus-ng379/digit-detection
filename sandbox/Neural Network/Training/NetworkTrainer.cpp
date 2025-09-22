@@ -15,6 +15,17 @@ NetworkTrainer::NetworkTrainer() {
     this->data_loaded = false;
     this->epoch = 0;
 }
+
+NetworkTrainer::NetworkTrainer(NetworkSettings* settings) {
+    this->training_split = 0.8;
+    this->network_settings = settings;
+    this->data_helper = DatasetHandling();
+    this->evaluator = NetworkEvaluator();
+
+    this->current_learn_rate = this->network_settings->get_initial_learning_rate();
+    this->data_loaded = false;
+    this->epoch = 0;
+}
         
 void NetworkTrainer::StartTrainingSession(int num_epochs) {
     if (!this->data_loaded) {

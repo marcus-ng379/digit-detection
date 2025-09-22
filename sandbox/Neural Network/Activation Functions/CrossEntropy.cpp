@@ -6,7 +6,7 @@ double CrossEntropy::Output(double* traversed_outputs, double* expected_outputs,
     for (int i = 0; i < outputs_length; i++) {
         double x = traversed_outputs[i]; 
         double y = expected_outputs[i];
-        double v = (y == 1.0)? -std::log10(x) : -std::log10(1 - x);
+        double v = (y == 1.0)? -std::log(x) : -std::log(1 - x);
         cost += std::isnan(v)? 0 : v;
     }
     return cost;
@@ -18,7 +18,7 @@ double CrossEntropy::Der(double traversed_outputs, double expected_outputs) {
     if (x == 0.0 || x == 1.0) {
         return 0;
     }
-    return (-x + y) / (x * (x - 1));
+    return (x - y) / (x * (1.0 - x));
 }
         
 CostType CrossEntropy::GetType() {

@@ -3,6 +3,7 @@
 #include "Batch.h"
 #include "NetworkEvaluator.h"
 #include "NetworkSettings.h"
+#include "DatasetHandling.h"
 
 class NetworkTrainer {
     private:
@@ -25,6 +26,7 @@ class NetworkTrainer {
         int epoch;
     public:
         NetworkTrainer();
+        NetworkTrainer(NetworkSettings* settings);
         void StartTrainingSession(int num_epochs);
         void LoadData();
 

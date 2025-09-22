@@ -1,7 +1,11 @@
 #include "DataPoint.h"
 
 DataPoint::DataPoint(double* inputs, int inputs_length, int label, int num_labels) {
-    this->inputs = inputs;
+    //Shallow copy is bad, use deep copy
+    this->inputs = new double[inputs_length];
+    for (int i = 0; i < inputs_length; i++) {
+        this->inputs[i] = inputs[i];
+    }
     this->inputs_length = inputs_length;
     this->label = label;
     this->expected_outputs_length = num_labels;
