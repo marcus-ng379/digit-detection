@@ -9,8 +9,8 @@ A C++ application for recognizing handwritten digits with a neural network using
   
 <details>
 <summary><strong>Install wxWidgets Locally (OPTIONAL)</strong></summary>
-- [wxWidgets Installation Guide](https://github.com/marcus-ng379/digit-detection/blob/main/wxWidgetsInstallation.md)
-- Install directly:
+Method 1: [wxWidgets Installation Guide](https://github.com/marcus-ng379/digit-detection/blob/main/wxWidgetsInstallation.md)
+Method 2: Install directly:
   
     sudo apt install libwxgtk3.2-dev
   
