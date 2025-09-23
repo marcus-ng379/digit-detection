@@ -12,7 +12,7 @@ Method 1: Install directly:
 ```bash
 sudo apt install libwxgtk3.2-dev
 ```
-Method 2: [wxWidgets Installation Guide](https://github.com/marcus-ng379/digit-detection/blob/main/wxWidgetsInstallation.md)
+Method 2: [wxWidgets Installation Guide](https://github.com/marcus-ng379/digit-detection/blob/main/docs/wxWidgetsInstallation.md)
 
 ## Installation
 1. Make sure you've updated your system
@@ -25,7 +25,7 @@ sudo apt upgrade
 ```bash
 sudo apt install cmake # Install CMakeLists
 sudo apt install build-essential # Installs Make, G++, GCC
-sudo apt install libgtk-3-dev # CMake Dependecy 
+sudo apt install libgtk-3-dev # CMake pkg for GUIs
 ```
 
 3. Clone the project using
