@@ -6,13 +6,15 @@ A C++ application for recognizing handwritten digits with a neural network using
 - Ubuntu 24.04 or later
 - CMake 3.16 or later
 - C++17 compiler
-
-If you have *sudo* permission, you can install wxWidgets locally via:
-
-- [wxWidgets Installation Guide](https://github.com/marcus-ng379/digit-detection/blob/main/wxWidgetsInstallation.txt)
-- Or directly:
-  ```bash
-  sudo apt install libwxgtk3.2-dev
+  
+<details>
+<summary><strong>Install wxWidgets Locally (OPTIONAL)</strong></summary>
+- [wxWidgets Installation Guide](https://github.com/marcus-ng379/digit-detection/blob/main/wxWidgetsInstallation.md)
+- Install directly:
+  
+    sudo apt install libwxgtk3.2-dev
+  
+</details>
 
 ## Installation
 1. Make sure you've updated your system
