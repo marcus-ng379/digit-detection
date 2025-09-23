@@ -31,17 +31,9 @@ sudo apt install libgtk-3-dev # CMake Dependecy
 Clone the project using
 ```bash
 git clone https://github.com/marcus-ng379/digit-detection.git
+cd digit-detection
 ```
-
-- If you *don't* have wxWidgets installed locally, install wxWidgets submodule and compile with
-```bash
-git submodule update --init --recursive
-mkdir build
-cd build
-cmake -DUSE_SYSTEM_WXWIDGETS=OFF ..
-cmake --build .
-```
-
+<details> <summary><strong> With wxWidgets installed locally</strong></summary>
 If you already installed wxWidgets locally, you can simply compile the program with 
 ```bash
 mkdir build
@@ -49,6 +41,19 @@ cd build
 cmake -DUSE_SYSTEM_WXWIDGETS=ON ..
 cmake --build .
 ```
+</details>
+
+<details> <summary><strong> wxWidgets NOT installed locally</strong></summary>
+Use the bundled submodule to build wxWidgets from source:
+```bash
+git submodule update --init --recursive
+mkdir build
+cd build
+cmake -DUSE_SYSTEM_WXWIDGETS=OFF ..
+cmake --build .
+```
+</details>
+
 
 Run the program inside *build*
 ```bash
