@@ -12,7 +12,7 @@ Method 1: Install directly:
 ```bash
 sudo apt install libwxgtk3.2-dev
 ```
-Method 2: <a href="https://example.com](https://github.com/marcus-ng379/digit-detection/blob/main/wxWidgetsInstallation.md">wxWidgets Installation Guide</a>  
+Method 2: [https://github.com/marcus-ng379/digit-detection/blob/main/wxWidgetsInstallation.txt](wxWidgets Installation Guide)
 
 ## Installation
 1. Make sure you've updated your system
