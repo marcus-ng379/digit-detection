@@ -8,22 +8,23 @@ Make sure you have Ubuntu Version 24.04 or above!
 ## Installation
 
 To install wxWidgets on Ubuntu:   
-1. Upgrade your apt:
+1. Update your system apt:
 ```bash
 sudo apt update
 sudo apt upgrade
 ```
 
-2. Make sure you have all essentials installed.
-Install all with
+2. Build all dependecies and Tools required for using CMake and C++.
 ```bash
-sudo apt install build-essential
-sudo apt install libgtk-3-dev pkg-config
+sudo apt install build-essential libgtk-3-dev pkg-config
 ```
 
-3. Navigate towards extern/wxWidgets-3.2.8 and build the wxWidget folder:
+3. Extract and Build wxWidgets Locally
 ```bash
-cmake .. -DwxBUILD_SHARED=OFF -DwxBUILD_GUI=ON
-make -j$(nproc)
+cd extern/wxWidgets-3.2.8 # Locate wxwidget folder in extern/
+mkdir build-cmake
+cd build-cmake
+cmake .. -DwxBUILD_SHARED=OFF -DwxBUILD_GUI=ON # find dependecies
+make -j$(nproc) # build dependecies
 sudo make install
 ```
