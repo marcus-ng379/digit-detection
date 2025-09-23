@@ -1,3 +1,0 @@
-/home/a/vscode/digit-detection/build/CMakeFiles/Digit_Detection.dir
-/home/a/vscode/digit-detection/build/CMakeFiles/edit_cache.dir
-/home/a/vscode/digit-detection/build/CMakeFiles/rebuild_cache.dir
