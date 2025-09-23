@@ -15,26 +15,26 @@ If you have *sudo* permission, you can install wxWidgets locally via:
   sudo apt install libwxgtk3.2-dev
 
 ## Installation
-Make sure you've updated your system
+1. Make sure you've updated your system
 ```bash
 sudo apt update
 sudo apt upgrade
 ```
 
-Install dependecies
+2. Install dependecies
 ```bash
 sudo apt install cmake # Install CMakeLists
 sudo apt install build-essential # Installs Make, G++, GCC
 sudo apt install libgtk-3-dev # CMake Dependecy 
 ```
 
-Clone the project using
+3. Clone the project using
 ```bash
 git clone https://github.com/marcus-ng379/digit-detection.git
 cd digit-detection
 ```
 
-Build the project from one of the options:
+4. Build the project from one of the options:
 <details>
 <summary><strong>With wxWidgets installed locally</strong></summary>
 
@@ -63,7 +63,7 @@ Use the bundled submodule to build wxWidgets from source (note this may take a f
 </details>
 
 
-Run the program inside *build*
+5. Run the program inside the *build*
 ```bash
 ./Digit_Detection
 ```
