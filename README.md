@@ -23,7 +23,6 @@ sudo apt install build-essential libgtk-3-dev pkg-config bzip2
 
 4. Extract and Build wxWidgets Locally
 ```bash
-cd extern
 tar -xjf wxWidgets-3.2.8.tar.bz2 # Extract wxWidget
 cd wxWidgets-3.2.8 # Locate wxwidget extracted folder in extern/
 mkdir build-cmake
