@@ -4,12 +4,11 @@ set(CMAKE_CXX_STANDARD 17)
 
 option(USE_SYSTEM_WXWIDGETS "Use system-installed wxWidgets" ON)
 
-# Add executable
-add_executable(Digit_Detection
-    src/main.cpp
-    src/wxwidget/Frame.cpp
-    src/neural/Activations.cpp
+# Add ALL .cpp executable under src/
+file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
+    ${PROJECT_SOURCE_DIR}/src/*.cpp
 )
+add_executable(Digit_Detection ${SOURCES})
 
 # Include your own headers
 target_include_directories(Digit_Detection PRIVATE
