@@ -47,6 +47,8 @@ If you already installed wxWidgets locally, you can simply compile the program w
 
 </details>
 
+
+
 <details>
 <summary><strong>wxWidgets NOT installed locally</strong></summary>
 
