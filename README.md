@@ -1,33 +1,56 @@
 # Digit Detection
 
-A C++ application for recognizing handwritten digits with neural network using wxWidgets for GUI rendering.
+A C++ application for recognizing handwritten digits with a neural network using wxWidgets for GUI rendering.
 
-# Requirements
-Make sure you have Ubuntu Version 24.04 or above!
+## Requirements
+- Ubuntu 24.04 or later
+- CMake 3.16 or later
+- C++17 compiler
+
+If you have *sudo* permission, you can install wxWidgets locally via:
+
+- [wxWidgets Installation Guide](https://github.com/marcus-ng379/digit-detection/blob/main/wxWidgetsInstallation.txt)
+- Or directly:
+  ```bash
+  sudo apt install libwxgtk3.2-dev
 
 ## Installation
-
-To install wxWidgets on Ubuntu:   
-1. Download the Source for Linux under *Latest Stable Release: 3.2.8* on the web https://wxwidgets.org/downloads/
-  
-2. Update your system apt:
+Make sure you've updated your system
 ```bash
 sudo apt update
 sudo apt upgrade
 ```
 
-3. Build all dependecies and Tools required for using CMake and C++.
+Install dependecies
 ```bash
-sudo apt install build-essential libgtk-3-dev pkg-config bzip2
-``` 
+sudo apt install cmake # Install CMakeLists
+sudo apt install build-essential # Installs Make, G++, GCC
+sudo apt install libgtk-3-dev # CMake Dependecy 
+```
 
-4. Extract and Build wxWidgets Locally
+Clone the project using
 ```bash
-tar -xjf wxWidgets-3.2.8.tar.bz2 # Extract wxWidget
-cd wxWidgets-3.2.8 # Locate wxwidget extracted folder in extern/
-mkdir build-cmake
-cd build-cmake
-cmake .. -DwxBUILD_SHARED=OFF -DwxBUILD_GUI=ON # find dependecies
-make -j$(nproc) # build dependecies
-sudo make install
+git clone https://github.com/marcus-ng379/digit-detection.git
+```
+
+- If you *don't* have wxWidgets installed locally, install wxWidgets submodule and compile with
+```bash
+git submodule update --init --recursive
+mkdir build
+cd build
+cmake -DUSE_SYSTEM_WXWIDGETS=OFF ..
+cmake --build .
+```
+
+If you already installed wxWidgets locally, you can simply compile the program with 
+```bash
+mkdir build
+cd build
+cmake -DUSE_SYSTEM_WXWIDGETS=ON ..
+cmake --build .
+```
+
+Run the program inside *build*
+```bash
+./Digit_Detection
 ```
