@@ -10,6 +10,7 @@ class MainApp : public wxApp {
         bool OnInit() override;
 
 };
+
 // On App run (main function)
 bool MainApp::OnInit() {
     // Run any neural stuff here

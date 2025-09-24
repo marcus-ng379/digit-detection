@@ -10,7 +10,8 @@ EvaluationData* NetworkEvaluator::Evaluate(NeuralNetwork* network, DataPoint** d
         // Runs through the network given one data
         double* output = network->CalculateOutputs(data[i]->get_inputs());
         int traversed_label = network->max_value_index(output);
-
+        delete[] output;
+        
         // Evaluating the correctness of the network given 1 data point
         eval_data->increment_total_per_label(data[i]->get_label());
         if (traversed_label == data[i]->get_label()) {

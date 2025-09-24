@@ -91,6 +91,7 @@ double* Layer::Output(double* inputs) {
     for (int output_node = 0; output_node < this->num_output_nodes; output_node++) {
         activated[output_node] = this->activation->get_activation()->Activate(weighted_inputs, this->num_output_nodes, output_node);
     }
+    delete[] weighted_inputs;
 
     return activated;
 }
