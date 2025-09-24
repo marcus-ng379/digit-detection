@@ -2,6 +2,8 @@
 
 EvaluationData::EvaluationData(int num_labels) {
     this->num_labels = num_labels;
+    this->num_correct = 0;
+    this->total = 0;
     this->num_correct_per_label = new int[num_labels];
     this->total_per_label = new int[num_labels];
     this->falsely_labelled = new int[num_labels];

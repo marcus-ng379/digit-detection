@@ -58,6 +58,9 @@ void NetworkTrainer::StartTrainingSession(int num_epochs) {
         // Next Epoch
         this->data_helper.ShuffleBatches(this->training_batches, this->num_training_batches);
         this->current_learn_rate = (1.0 / (1.0 + this->network_settings->get_learn_rate_decay() * this->epoch)) * this->network_settings->get_initial_learning_rate();
+
+        delete train_eval;
+        delete validation_eval;
     }
 }
 
@@ -87,20 +90,20 @@ void NetworkTrainer::_set_data(DataPoint** data, int data_length) {
 
 NetworkTrainer::~NetworkTrainer() {
     delete this->network_settings;
-    for (int i = 0; i < this->all_data_length; i++) {
+
+    for (int i = 0; i < this->all_data_length; i++)
         delete this->all_data[i];
-    }
-    for (int i = 0; i < this->training_data_length; i++) {
-        delete this->training_data[i];
-    }
-    for (int i = 0; i < this->validation_data_length; i++) {
-        delete this->validation_data[i];
-    }
-    for (int i = 0; i < this->num_training_batches; i++) {
-        delete this->training_batches[i];
-    }
     delete[] this->all_data;
+
+    for (int i = 0; i < this->training_data_length; i++)
+        delete this->training_data[i];
     delete[] this->training_data;
+
+    for (int i = 0; i < this->validation_data_length; i++)
+        delete this->validation_data[i];
     delete[] this->validation_data;
+
+    for (int i = 0; i < this->num_training_batches; i++)
+        delete this->training_batches[i];
     delete[] this->training_batches;
 }
