@@ -8,16 +8,17 @@ class NetworkTest {
         }
     private:
         void testSimpleData() {
-            NetworkSettings settings;
+            NetworkSettings* settings = new NetworkSettings();
             // ARCHITECTURE
             int* layer_sizes = new int[3];
             layer_sizes[0] = 2;   // input dimension
             layer_sizes[1] = 8;   // hidden layer
             layer_sizes[2] = 2;   // output layer (two classes)
-            settings.set_layer_sizes(layer_sizes);
-            settings.set_num_layers(3);
 
-            NetworkTrainer network_trainer(settings);
+            // Configure Settings
+            settings->set_layer_sizes(layer_sizes);
+            settings->set_num_layers(3);
+            NetworkTrainer network_trainer(settings); // Create trainer
 
             const int N = 200;
             DataPoint** data = new DataPoint*[N];
