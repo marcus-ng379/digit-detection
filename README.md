@@ -3,7 +3,7 @@
 A C++ application for recognizing handwritten digits with a neural network using wxWidgets for GUI rendering.
 
 ## Requirements
-- Debian-based system (Recommended 24.04 or later)
+- Debian-based system (Recommended Ubuntu 24.04 or later)
 - CMake (Recommended V3.28.3)
 - C++ Compiler (Recommended C++17)
   
