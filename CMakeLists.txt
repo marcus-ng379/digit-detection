@@ -3,8 +3,9 @@ project(Digit_Detection)
 set(CMAKE_CXX_STANDARD 17)
 
 option(USE_SYSTEM_WXWIDGETS "Use system-installed wxWidgets" ON)
+option(WARNINGS "Compile with -Wall and -Wextra" OFF)
 
-# Add ALL .cpp executable under src/
+# Collect all .cpp source files recursively from src/ directory.
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
     ${PROJECT_SOURCE_DIR}/src/*.cpp
 )
@@ -27,3 +28,9 @@ else()
     add_subdirectory(lib/wxWidgets)
     target_link_libraries(Digit_Detection PRIVATE wx::core wx::base)
 endif()
+
+# Compile with warnings
+if (WARNINGS)
+    target_compile_options(Digit_Detection PRIVATE -Wextra -Wall) # G++ warnings
+endif()
+
