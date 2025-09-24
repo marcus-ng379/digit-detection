@@ -5,6 +5,7 @@ LayerLearningData::LayerLearningData() {
     this->weighted_inputs = nullptr;
     this->activations = nullptr;
     this->node_values = nullptr;
+    this->size = 0;
 }
 
 LayerLearningData::LayerLearningData(Layer* layer) {

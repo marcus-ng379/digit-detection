@@ -18,6 +18,9 @@ NeuralNetwork::NeuralNetwork(int* layer_sizes, int num_layers) {
 
     this->output_layer_size = layer_sizes[this->layers_length];
     this->cost = new CallCost(meanSquaredError);
+
+    this->batch_learn_data = nullptr; 
+    this->batch_learn_data_length = 0;
 }
         
 // Neural Network Output
@@ -41,10 +44,17 @@ int NeuralNetwork::max_value_index(double* values) {
 }
         
 double* NeuralNetwork::CalculateOutputs(double* inputs) {
+    double* current_inputs = inputs;
     for (int i = 0; i < this->layers_length; i++) {
-        inputs = this->layers[i]->Output(inputs);
+        double* next_inputs = this->layers[i]->Output(current_inputs);
+        
+        // Only delete if this isn't the original input array
+        if (current_inputs != inputs) {
+            delete[] current_inputs;
+        }
+        current_inputs = next_inputs;
     }
-    return inputs;
+    return current_inputs;
 }
 
 // Learning
