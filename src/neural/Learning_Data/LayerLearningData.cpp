@@ -54,7 +54,7 @@ double LayerLearningData::get_inputs(int index) {
 }
 
 LayerLearningData::~LayerLearningData() {
-    delete[] this->inputs;
+    //delete[] this->inputs;
     delete[] this->weighted_inputs;
     delete[] this->activations;
     delete[] this->node_values;

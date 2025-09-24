@@ -10,7 +10,7 @@ class NetworkTrainer {
         DatasetHandling data_helper;
         NetworkEvaluator evaluator;
         float training_split;
-        NetworkSettings* network_settings;
+        NetworkSettings network_settings;
 
         DataPoint** all_data;
         int all_data_length;
@@ -26,7 +26,7 @@ class NetworkTrainer {
         int epoch;
     public:
         NetworkTrainer();
-        NetworkTrainer(NetworkSettings* settings);
+        NetworkTrainer(NetworkSettings& settings);
         void StartTrainingSession(int num_epochs);
         void LoadData();
 

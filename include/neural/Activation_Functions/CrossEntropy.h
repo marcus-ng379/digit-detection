@@ -4,9 +4,9 @@
 
 class CrossEntropy: public Costs {
     public:
-        double Output(double* traversed_outputs, double* expected_outputs, int outputs_length);
-        double Der(double traversed_outputs, double expected_outputs);
-        CostType GetType();
+        double Output(double* traversed_outputs, double* expected_outputs, int outputs_length) override;
+        double Der(double traversed_outputs, double expected_outputs) override;
+        CostType GetType() override;
 };
 
 #endif

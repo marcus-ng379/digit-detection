@@ -2,14 +2,14 @@
 #include <cmath>
 #include <utility>
 #include "neural/Layers/Layer.h"
-#include "neural/Activation_Functions/Sigmoid.h"
+#include "neural/Activation_Functions/CallActivation.h"
 
 
 Layer::Layer(int num_input_nodes, int num_output_nodes) {
     // Construction
     this->num_input_nodes = num_input_nodes;
     this->num_output_nodes = num_output_nodes;
-    this->activation = new Sigmoid();
+    this->activation = new CallActivation(sigmoid);
 
     this->len_weights = num_input_nodes * num_output_nodes;
     this->len_biases = num_output_nodes;
@@ -39,7 +39,8 @@ int Layer::get_num_output_nodes() {
 }
         
 void Layer::set_activation(Activations* activation) {
-    this->activation = activation;
+    delete this->activation;
+    this->activation = new CallActivation(activation->GetType());
 }
         
 double Layer::get_weight(int input_node, int output_node) {
@@ -55,7 +56,7 @@ int Layer::get_flat_weight_index(int input_node_index, int output_node_index) {
 void Layer::init_random_weights() {
     // Xavier/He initialization
     double scale;
-    if (this->activation->GetType() == relu) {
+    if (this->activation->get_activation()->GetType() == relu) {
         // He initialization for ReLU
         scale = std::sqrt(2.0 / num_input_nodes);
     }
@@ -88,7 +89,7 @@ double* Layer::Output(double* inputs) {
     // Activate all weighted inputs using the activation function
     double* activated = new double[this->num_output_nodes];
     for (int output_node = 0; output_node < this->num_output_nodes; output_node++) {
-        activated[output_node] = this->activation->Activate(weighted_inputs, this->num_output_nodes, output_node);
+        activated[output_node] = this->activation->get_activation()->Activate(weighted_inputs, this->num_output_nodes, output_node);
     }
 
     return activated;
@@ -108,7 +109,7 @@ std::pair<double*, int> Layer::Output(double* inputs, int inputs_length, LayerLe
     }
 
     for (int output_node = 0; output_node < learn_data->get_size(); output_node++) {
-        learn_data->set_activations(output_node, this->activation->Activate(learn_data->get_weighted_inputs(), this->num_output_nodes, output_node));
+        learn_data->set_activations(output_node, this->activation->get_activation()->Activate(learn_data->get_weighted_inputs(), this->num_output_nodes, output_node));
     }
 
     return std::make_pair(learn_data->get_activations(), learn_data->get_size());
@@ -144,7 +145,7 @@ void Layer::OutputLayerNodeValues(LayerLearningData* learn_data, double* expecte
     for (int i = 0; i < learn_data->get_size(); i++) {
         // Partial Derivatives for the current node: cost/activation and activation/weighted_input
         double cost_derivative = cost->Der(learn_data->get_activations()[i], expected_outputs[i]);
-        double activation_derivative = this->activation->Der(learn_data->get_weighted_inputs(), learn_data->get_size(), i);
+        double activation_derivative = this->activation->get_activation()->Der(learn_data->get_weighted_inputs(), learn_data->get_size(), i);
         learn_data->set_node_values(i, cost_derivative * activation_derivative);
     }
 
@@ -159,7 +160,7 @@ void Layer::HiddenLayerNodeValues(LayerLearningData* learn_data, Layer* old_laye
             double weighted_input_derivative = old_layer->get_weight(new_node_index, old_node_index);
             new_node_value += weighted_input_derivative * old_node_values[old_node_index];
         }
-        new_node_value *= this->activation->Der(learn_data->get_weighted_inputs(), learn_data->get_size(), new_node_index);
+        new_node_value *= this->activation->get_activation()->Der(learn_data->get_weighted_inputs(), learn_data->get_size(), new_node_index);
         learn_data->set_node_values(new_node_index, new_node_value);
     }
 }

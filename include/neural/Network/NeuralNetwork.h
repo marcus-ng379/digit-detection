@@ -2,7 +2,7 @@
 #define NEURALNETWORK_H
 #include <utility>
 #include "neural/Layers/Layer.h"
-#include "neural/Activation_Functions/Costs.h"
+#include "neural/Activation_Functions/CallCost.h"
 #include "neural/Learning_Data/NetworkLearningData.h"
 #include "neural/Data_Handling/DataPoint.h"
 
@@ -11,7 +11,7 @@ class NeuralNetwork {
         Layer** layers;
         int layers_length;
         int* layer_sizes;
-        Costs* cost;
+        CallCost* cost;
         NetworkLearningData** batch_learn_data;
         int batch_learn_data_length;
 

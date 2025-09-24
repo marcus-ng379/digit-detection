@@ -17,7 +17,7 @@ class NetworkTest {
             settings.set_layer_sizes(layer_sizes);
             settings.set_num_layers(3);
 
-            NetworkTrainer network_trainer(&settings);
+            NetworkTrainer network_trainer(settings);
 
             const int N = 200;
             DataPoint** data = new DataPoint*[N];

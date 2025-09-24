@@ -9,23 +9,23 @@
 NetworkTrainer::NetworkTrainer() {
     // Network Training Constructor
     this->training_split = 0.8;
-    this->network_settings = new NetworkSettings();
+    this->network_settings = NetworkSettings();
     this->data_helper = DatasetHandling();
     this->evaluator = NetworkEvaluator();
 
-    this->current_learn_rate = this->network_settings->get_initial_learning_rate();
+    this->current_learn_rate = this->network_settings.get_initial_learning_rate();
     this->data_loaded = false;
     this->epoch = 0;
 }
 
-NetworkTrainer::NetworkTrainer(NetworkSettings* settings) {
+NetworkTrainer::NetworkTrainer(NetworkSettings& settings) {
     // Constructs Network Tester given network settings
     this->training_split = 0.8;
     this->network_settings = settings;
     this->data_helper = DatasetHandling();
     this->evaluator = NetworkEvaluator();
 
-    this->current_learn_rate = this->network_settings->get_initial_learning_rate();
+    this->current_learn_rate = this->network_settings.get_initial_learning_rate();
     this->data_loaded = false;
     this->epoch = 0;
 }
@@ -37,15 +37,15 @@ void NetworkTrainer::StartTrainingSession(int num_epochs) {
     }
 
     // Initializes the neural network
-    NeuralNetwork* neural_network = new NeuralNetwork(this->network_settings->get_layer_sizes(), this->network_settings->get_num_layers());
-    neural_network->set_activation_function(this->network_settings->get_activation_type(), this->network_settings->get_output_activation_type());
-    neural_network->set_cost_function(this->network_settings->get_cost_type());
+    NeuralNetwork* neural_network = new NeuralNetwork(this->network_settings.get_layer_sizes(), this->network_settings.get_num_layers());
+    neural_network->set_activation_function(this->network_settings.get_activation_type(), this->network_settings.get_output_activation_type());
+    neural_network->set_cost_function(this->network_settings.get_cost_type());
 
     // Learning
     for (int epoch = 1; epoch <= num_epochs; epoch++) {
         for (int batch = 0; batch < this->num_training_batches; batch++) {
-            neural_network->Learn(this->training_batches[batch]->get_data(), this->network_settings->get_mini_batch_size(), this->current_learn_rate, 
-                                this->network_settings->get_regularization(), this->network_settings->get_momentum());
+            neural_network->Learn(this->training_batches[batch]->get_data(), this->network_settings.get_mini_batch_size(), this->current_learn_rate, 
+                                this->network_settings.get_regularization(), this->network_settings.get_momentum());
         }
         this->epoch = epoch;
         // Evaluation
@@ -57,11 +57,12 @@ void NetworkTrainer::StartTrainingSession(int num_epochs) {
 
         // Next Epoch
         this->data_helper.ShuffleBatches(this->training_batches, this->num_training_batches);
-        this->current_learn_rate = (1.0 / (1.0 + this->network_settings->get_learn_rate_decay() * this->epoch)) * this->network_settings->get_initial_learning_rate();
+        this->current_learn_rate = (1.0 / (1.0 + this->network_settings.get_learn_rate_decay() * this->epoch)) * this->network_settings.get_initial_learning_rate();
 
         delete train_eval;
         delete validation_eval;
     }
+    delete neural_network;
 }
 
 void NetworkTrainer::LoadData() {
@@ -76,7 +77,7 @@ void NetworkTrainer::LoadData() {
     this->validation_data = result.second.first;
     this->validation_data_length = result.second.second;
 
-    std::pair<Batch**, int> result1 = this->data_helper.CreateMiniBatches(this->training_data, this->training_data_length, this->network_settings->get_mini_batch_size());
+    std::pair<Batch**, int> result1 = this->data_helper.CreateMiniBatches(this->training_data, this->training_data_length, this->network_settings.get_mini_batch_size());
     this->training_batches = result1.first;
     this->num_training_batches = result1.second;
     this->data_loaded = true;
@@ -89,8 +90,5 @@ void NetworkTrainer::_set_data(DataPoint** data, int data_length) {
 }
 
 NetworkTrainer::~NetworkTrainer() {
-    // delete[] this->all_data;
-    // delete[] this->training_data;
-    // delete[] this->validation_data;
-    // delete[] this->training_batches;
+    
 }

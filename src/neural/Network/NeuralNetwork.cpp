@@ -3,7 +3,7 @@
 #include <ctime>
 #include <limits>
 #include "neural/Network/NeuralNetwork.h"
-#include "neural/Activation_Functions/MeanSquaredError.h"
+#include "neural/Activation_Functions/CallCost.h"
 
 
 NeuralNetwork::NeuralNetwork(int* layer_sizes, int num_layers) {
@@ -17,7 +17,7 @@ NeuralNetwork::NeuralNetwork(int* layer_sizes, int num_layers) {
     }
 
     this->output_layer_size = layer_sizes[this->layers_length];
-    this->cost = new MeanSquaredError();
+    this->cost = new CallCost(meanSquaredError);
 }
         
 // Neural Network Output
@@ -85,7 +85,7 @@ void NeuralNetwork::update_gradients(DataPoint* data, NetworkLearningData* learn
     LayerLearningData* output_learn_data = learn_data->get_layer_data(output_layer_idx);
 
     //Update output layer gradients
-    output_layer->OutputLayerNodeValues(output_learn_data, data->get_expected_outputs(), this->cost);
+    output_layer->OutputLayerNodeValues(output_learn_data, data->get_expected_outputs(), this->cost->get_activation());
     output_layer->UpdateGradients(output_learn_data);
 
     //Update all hidden layer gradients
@@ -101,7 +101,8 @@ void NeuralNetwork::update_gradients(DataPoint* data, NetworkLearningData* learn
 
 // Setting functions
 void NeuralNetwork::set_cost_function(Costs* cost_function) {
-    this->cost = cost_function;
+    delete this->cost;
+    this->cost = new CallCost(cost_function->GetType());
 }
         
 void NeuralNetwork::set_activation_function(Activations* activation) {
@@ -122,7 +123,7 @@ NeuralNetwork::~NeuralNetwork() {
     for (int i = 0; i < this->batch_learn_data_length; i++) {
         delete this->batch_learn_data[i];
     }
-    delete[] this->layer_sizes;
+    //delete[] this->layer_sizes;
     delete this->cost;
     delete[] this->layers;
     delete[] this->batch_learn_data;

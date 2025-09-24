@@ -1,7 +1,7 @@
 #ifndef LAYER_H
 #define LAYER_H
 #include <utility>
-#include "neural/Activation_Functions/Activations.h"
+#include "neural/Activation_Functions/CallActivation.h"
 #include "neural/Learning_Data/LayerLearningData.h"
 #include "neural/Activation_Functions/Costs.h"
 
@@ -23,7 +23,7 @@ class Layer {
         double* weight_vels;
         double* bias_vels;
 
-        Activations* activation;
+        CallActivation* activation;
     public:
         Layer(int num_input_nodes, int num_output_nodes);
 

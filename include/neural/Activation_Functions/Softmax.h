@@ -4,9 +4,9 @@
 
 class Softmax : public Activations {
     public:
-        double Activate(double* inputs, int inputs_length, int index);
-        double Der(double* inputs, int inputs_length, int index);
-        ActivationType GetType();
+        double Activate(double* inputs, int inputs_length, int index) override;
+        double Der(double* inputs, int inputs_length, int index) override;
+        ActivationType GetType() override;
 };
 
 #endif
