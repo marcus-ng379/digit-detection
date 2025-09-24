@@ -89,8 +89,8 @@ void NetworkTrainer::_set_data(DataPoint** data, int data_length) {
 }
 
 NetworkTrainer::~NetworkTrainer() {
-    delete[] this->all_data;
-    delete[] this->training_data;
-    delete[] this->validation_data;
-    delete[] this->training_batches;
+    // delete[] this->all_data;
+    // delete[] this->training_data;
+    // delete[] this->validation_data;
+    // delete[] this->training_batches;
 }
