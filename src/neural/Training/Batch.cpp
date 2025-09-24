@@ -10,8 +10,5 @@ DataPoint** Batch::get_data() {
 }
 
 Batch::~Batch() {
-    for (int i = 0; i < this->data_length; i++) {
-        delete this->data[i];
-    }
-    delete[] this->data;
+    
 }
