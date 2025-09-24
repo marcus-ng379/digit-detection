@@ -3,9 +3,9 @@
 A C++ application for recognizing handwritten digits with a neural network using wxWidgets for GUI rendering.
 
 ## Requirements
-- Ubuntu 24.04 or later
-- CMake 3.16 or later
-- C++17 compiler
+- Debian-based system (Recommended 24.04 or later)
+- CMake (Recommended V3.28.3)
+- C++ Compiler (Recommended C++17)
   
 ## Install wxWidgets Locally (OPTIONAL)
 Method 1: Install directly:
@@ -36,7 +36,7 @@ cd digit-detection
 
 4. Build the project from one of the options:
 <details>
-<summary><strong>With wxWidgets installed locally</strong></summary>
+<summary><strong>OPTION 1: wxWidgets is installed locally</strong></summary>
 
 If you already installed wxWidgets locally, you can simply compile the program with:
 
@@ -47,10 +47,8 @@ If you already installed wxWidgets locally, you can simply compile the program w
 
 </details>
 
-
-
 <details>
-<summary><strong>wxWidgets NOT installed locally</strong></summary>
+<summary><strong>OPTION 2: wxWidgets NOT installed locally</strong></summary>
 
 Use the bundled submodule to build wxWidgets from source (note this may take a few minutes to fully build):
 
@@ -63,7 +61,7 @@ Use the bundled submodule to build wxWidgets from source (note this may take a f
 </details>
 
 
-5. Run the program inside the *build*
+5. Run the program inside *build* folder
 ```bash
 ./Digit_Detection
 ```
