@@ -26,3 +26,5 @@ double CrossEntropy::Der(double traversed_outputs, double expected_outputs) {
 CostType CrossEntropy::GetType() {
     return CostType::crossEntropy;
 }
+
+CrossEntropy::~CrossEntropy() {}

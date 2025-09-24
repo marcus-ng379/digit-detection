@@ -7,6 +7,7 @@ class ReLU : public Activations {
         double Activate(double* inputs, int inputs_length, int index) override;
         double Der(double* inputs, int inputs_length, int index) override;
         ActivationType GetType() override;
+        ~ReLU() override;
 };
 
 #endif

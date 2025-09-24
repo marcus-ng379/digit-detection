@@ -7,6 +7,7 @@ class Softmax : public Activations {
         double Activate(double* inputs, int inputs_length, int index) override;
         double Der(double* inputs, int inputs_length, int index) override;
         ActivationType GetType() override;
-};
+        ~Softmax() override;
+};  
 
 #endif

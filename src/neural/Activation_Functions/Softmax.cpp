@@ -24,3 +24,5 @@ double Softmax::Der(double* inputs, int inputs_length, int index) {
 ActivationType Softmax::GetType() {
     return ActivationType::softmax;
 }
+
+Softmax::~Softmax() {}

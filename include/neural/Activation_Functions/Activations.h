@@ -10,6 +10,7 @@ class Activations {
         virtual double Der(double* inputs, int inputs_length, int index) = 0;
         // Gets the Activation Type of the function
         virtual ActivationType GetType() = 0;
+        virtual ~Activations() = default;
 };
 
 #endif

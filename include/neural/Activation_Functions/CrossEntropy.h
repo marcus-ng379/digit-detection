@@ -7,6 +7,7 @@ class CrossEntropy: public Costs {
         double Output(double* traversed_outputs, double* expected_outputs, int outputs_length) override;
         double Der(double traversed_outputs, double expected_outputs) override;
         CostType GetType() override;
+        ~CrossEntropy() override;
 };
 
 #endif

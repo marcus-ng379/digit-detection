@@ -9,6 +9,7 @@ class Costs {
         // Running the cost function derivative
         virtual double Der(double traversed_outputs, double expected_outputs) = 0;
         virtual CostType GetType() = 0;
+        virtual ~Costs() = default;
 };
 
 #endif

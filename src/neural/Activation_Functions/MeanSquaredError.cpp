@@ -18,3 +18,5 @@ double MeanSquaredError::Der(double traversed_outputs, double expected_outputs) 
 CostType MeanSquaredError::GetType() {
     return CostType::meanSquaredError;
 }
+
+MeanSquaredError::~MeanSquaredError() {}
